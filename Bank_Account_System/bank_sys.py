@@ -1,6 +1,4 @@
-# ---------------------------
-# Base Class: BankAccount
-# ---------------------------
+
 class BankAccount:
     def __init__(self, name, acc_no, balance=0.0):
         self.name = name
@@ -28,10 +26,6 @@ class BankAccount:
             self.balance -= amount
             print(f"{self.name} withdrew ₹{amount}. New Balance = ₹{self.balance}")
 
-
-# ---------------------------
-# Savings Account
-# ---------------------------
 class SavingsAccount(BankAccount):
     def __init__(self, name, acc_no, balance=0.0, interest_rate=0.05):
         super().__init__(name, acc_no, balance)
@@ -43,9 +37,6 @@ class SavingsAccount(BankAccount):
         print(f"{self.name}: Interest ₹{interest:.2f} applied. New Balance = ₹{self.balance}")
 
 
-# ---------------------------
-# Current Account
-# ---------------------------
 class CurrentAccount(BankAccount):
     def __init__(self, name, acc_no, balance=0.0, overdraft_limit=5000):
         super().__init__(name, acc_no, balance)
@@ -61,9 +52,6 @@ class CurrentAccount(BankAccount):
             print(f"{self.name} withdrew ₹{amount}. New Balance = ₹{self.balance}")
 
 
-# ---------------------------
-# Fixed Deposit Account
-# ---------------------------
 class FixedDepositAccount(BankAccount):
     def __init__(self, name, acc_no, balance=0.0, lock_in_period=6):
         super().__init__(name, acc_no, balance)
@@ -83,9 +71,6 @@ class FixedDepositAccount(BankAccount):
             print(f"{self.name} withdrew ₹{amount}. New Balance = ₹{self.balance}")
 
 
-# ---------------------------
-# Bank Class
-# ---------------------------
 class Bank:
     def __init__(self):
         self.accounts = {}
@@ -108,23 +93,18 @@ class Bank:
             print(f"₹{amount} transferred from {from_acc.name} to {to_acc.name}")
 
 
-# ---------------------------
-# --- Demonstration ---
-# ---------------------------
+
 
 bank = Bank()
 
-# Create accounts with name "Shruthi"
 savings = SavingsAccount("Shruthi", 101, 5000, 0.06)
 current = CurrentAccount("Shruthi", 102, 2000, 3000)
 fd = FixedDepositAccount("Shruthi", 103, 10000, 6)
 
-# Add accounts to bank
 bank.add_account(savings)
 bank.add_account(current)
 bank.add_account(fd)
 
-# Savings account operations
 savings.getBalance()
 savings.deposit(2000)
 savings.getBalance()
@@ -133,20 +113,18 @@ savings.getBalance()
 savings.apply_interest()
 savings.getBalance()
 
-# Current account operations
 current.getBalance()
-current.withdraw(4000)  # overdraft allowed
+current.withdraw(4000)  
 current.getBalance()
 
-# Fixed deposit operations
 fd.getBalance()
-fd.withdraw(2000)       # before lock-in
+fd.withdraw(2000)       
 for _ in range(6):
     fd.complete_month()
-fd.withdraw(2000)       # after lock-in
+fd.withdraw(2000)       
 fd.getBalance()
 
-# Fund transfer
+
 bank.transfer_funds(101, 102, 3000)
 savings.getBalance()
 current.getBalance()
